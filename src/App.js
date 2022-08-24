@@ -15,15 +15,15 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  function handleLogin() {
-    setLoggedIn(true);
-  }
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  const handleLogin = () => {
+    setLoggedIn(true)
+  }
+  
   useEffect(() => {
     console.log(loggedIn);
-    console.log(typeof setLoggedIn)
   })
-  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <div className="App">
@@ -32,7 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={loggedIn ? <Home /> : <Navigate to="/sign-in" />}/>
           <Route path="/my-messages" element={loggedIn ? <Messages /> : <Navigate to="/sign-in" />}/>
-          <Route loggedIn={loggedIn} setLoggedIn={setLoggedIn} path="/sign-in" element={<Login />}/>
+          <Route loggedIn={loggedIn} handleLogin={handleLogin} path="/sign-in" element={<Login />}/>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="reset-password" element={<ResetPassword />} />
         </Routes>
