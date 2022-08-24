@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router, 
+  Route, 
+  Routes,
+  Navigate,
+} from 'react-router-dom';
+
+import Home from './pages/Home';
+import Navbar from './navigation/Navbar';
+import Login from './user/Login';
+import SignUp from './user/SignUp';
+import ResetPassword from './user/ResetPassword';
+import Messages from './user/Messages';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  useEffect(() => {
+    console.log(loggedIn);
+    console.log(typeof setLoggedIn)
+  })
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar loggedIn={loggedIn} handleLogin={handleLogin}/>
+        <Routes>
+          <Route path="/" element={loggedIn ? <Home /> : <Navigate to="/sign-in" />}/>
+          <Route path="/my-messages" element={loggedIn ? <Messages /> : <Navigate to="/sign-in" />}/>
+          <Route loggedIn={loggedIn} setLoggedIn={setLoggedIn} path="/sign-in" element={<Login />}/>
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="reset-password" element={<ResetPassword />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
