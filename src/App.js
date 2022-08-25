@@ -18,21 +18,21 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    setLoggedIn(true)
+    setLoggedIn(true);
   }
-  
-  useEffect(() => {
-    console.log(loggedIn);
-  })
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  }
 
   return (
     <div className="App">
       <Router>
-        <Navbar loggedIn={loggedIn} handleLogin={handleLogin}/>
+        <Navbar loggedIn={loggedIn} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={loggedIn ? <Home /> : <Navigate to="/sign-in" />}/>
           <Route path="/my-messages" element={loggedIn ? <Messages /> : <Navigate to="/sign-in" />}/>
-          <Route loggedIn={loggedIn} handleLogin={handleLogin} path="/sign-in" element={<Login />}/>
+          <Route path="/sign-in" element={<Login handleLogin={handleLogin} loggedIn={loggedIn}/>}/>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="reset-password" element={<ResetPassword />} />
         </Routes>
