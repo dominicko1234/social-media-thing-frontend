@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className="p-5">
                 {groups.map((group) => (
-                    <div className="p-5 mb-5 rounded-xl shadow-md bg-gray-100 flex items-center justify-between hover:bg-gray-200 hover:shadow-lg transition-all">
+                    <div className="p-5 mb-5 rounded-xl shadow-md bg-gray-100 flex items-center justify-between hover:bg-gray-200 hover:shadow-lg ">
                         <h1 className="">{group.group_name}</h1>
                         <small className='float-right'>{group.users_chatting} users</small>
                     </div>
